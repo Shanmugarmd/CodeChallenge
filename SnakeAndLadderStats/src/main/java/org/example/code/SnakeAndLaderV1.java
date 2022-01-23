@@ -11,7 +11,7 @@ public class SnakeAndLaderV1 {
 
     public static void main(String[] args) {
 
-        int noOfTiles = 100;
+        int noOfTiles = 10;
         List<Integer> tiles = IntStream.range(0, noOfTiles + 1).boxed().collect(Collectors.toList());
 
         // Snakes
@@ -27,7 +27,7 @@ public class SnakeAndLaderV1 {
 
         int counter = 0;
         int totalNoOfSteps = 0;
-        int timesToSimulate = 10;
+        int timesToSimulate = 5;
         while (counter < timesToSimulate) {
             int noOfSteps = playGame(tiles);
             listOfGameLength.add(noOfSteps);
@@ -47,17 +47,16 @@ public class SnakeAndLaderV1 {
 
     private static int playGame(List<Integer> tiles) {
         int steps = 0;
-        int i = 0;
-        while (true) {
-            int noOfTileInBoard = tiles.size() - 1;
-            if (!(i < noOfTileInBoard)) break;
+        int tileState = 0;
+        int noOfTileInBoard = tiles.size() - 1;
+        while (tileState < noOfTileInBoard) {
             steps += 1;
-            i = i + rollDice();
-            if (i > noOfTileInBoard) {
-                i = noOfTileInBoard;
+            tileState = tileState + rollDice();
+            if (tileState > noOfTileInBoard) {
+                tileState = noOfTileInBoard;
             }
-            i = tiles.get(i);
-            System.out.print(i + " ");
+            tileState = tiles.get(tileState);
+            System.out.print(tileState + " ");
         }
         System.out.println("\n" + steps);
         return steps;
